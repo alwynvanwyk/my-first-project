@@ -48,7 +48,7 @@ export default {
   },
   queueConsumers: {
     "my-first-queue": {
-      maxBatchSize: 3,
+      maxBatchSize: 5,
       maxBatchTimeout: 10,  // Max allowed is 60 seconds
       maxRetries: 3
     }
