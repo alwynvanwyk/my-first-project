@@ -16,6 +16,19 @@
 	},
 	"observability": {
 		"enabled": true
+	},
+	"queues": {
+		"producers": [
+			{
+				"queue": "my-first-queue",
+				"binding": "MY_FIRST_QUEUE"
+			}
+		],
+		// "consumers": [
+		// 	{
+		// 		"queue": "my-first-queue"
+		// 	}
+		// ]
 	}
 	/**
 	 * Smart Placement

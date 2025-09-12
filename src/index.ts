@@ -19,8 +19,36 @@ export default {
 				return new Response('Hello, Wordl!');
 			case '/random':
 				return new Response(crypto.randomUUID());
+			case '/send-queue':
+				// Send a message to the queue
+				await env.MY_FIRST_QUEUE.send({
+					message: 'Hello from queue!',
+					timestamp: new Date().toISOString(),
+					requestId: crypto.randomUUID()
+				});
+				return new Response('Message sent to queue!');
 			default:
 				return new Response('Not Found', { status: 404 });
+		}
+	},
+
+	// Queue consumer handler
+	async queue(batch, env, ctx): Promise<void> {
+		for (const message of batch.messages) {
+			console.log('Processing message:', message.body);
+			
+			try {
+				// Process your message here
+				// For example, log the message content
+				console.log('Message data:', JSON.stringify(message.body));
+				
+				// Acknowledge the message (mark as successfully processed)
+				message.ack();
+			} catch (error) {
+				console.error('Error processing message:', error);
+				// Retry the message (it will be redelivered)
+				message.retry();
+			}
 		}
 	},
 } satisfies ExportedHandler<Env>;

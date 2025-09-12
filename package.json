@@ -2,15 +2,19 @@
 	"name": "my-first-worker",
 	"version": "0.0.0",
 	"private": true,
+	"type": "module",
 	"scripts": {
 		"deploy": "wrangler deploy",
 		"dev": "wrangler dev",
+		"dev:miniflare": "node scripts/miniflare-with-config.js",
+		"dev:miniflare-server": "node scripts/miniflare-server.js",
 		"start": "wrangler dev",
 		"test": "vitest",
 		"cf-typegen": "wrangler types"
 	},
 	"devDependencies": {
 		"@cloudflare/vitest-pool-workers": "^0.8.19",
+		"miniflare": "^4.20250906.1",
 		"typescript": "^5.5.2",
 		"vitest": "~3.2.0",
 		"wrangler": "^4.34.0"
